@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanish Poddar - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<link rel="icon" href="image/favicon.png" type="image/png">
+
+<body>
+    <div class="terminal-loader">
+        <div class="terminal-header">
+            <div class="terminal-title">Status</div>
+            <div class="terminal-controls">
+                <div class="control close"></div>
+                <div class="control minimize"></div>
+                <div class="control maximize"></div>
+            </div>
+        </div>
+        <div class="text">Loading...</div>
+    </div>
+
+    <div id="main-content">
+    <div id="world"></div>
+    <div class="overlay"></div>
+    <!-- Replace your existing nav with this -->
+    <nav class="nav-container">
+        <div class="nav-inner">
+          <div class="nav-items">
+            <div class="group relative px-4 cursor-pointer">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                  <path stroke="currentColor" d="M9 22V12H15V22M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"></path>
+                </svg>
+              </div>
+              <span class="nav-tooltip">Home</span>
+            </div>
+    
+            <div class="group relative px-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                <path stroke="currentColor" d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+            <span class="nav-tooltip">Projects</span>
+            </div>
+    
+            <div class="group relative px-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                <path stroke="currentColor" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+            </div>
+            <span class="nav-tooltip">Skills</span>
+            </div>
+    
+            <div class="group relative px-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                <path stroke="currentColor" d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path stroke="currentColor" d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+            </div>
+            <span class="nav-tooltip">Education</span>
+            </div>
+    
+            <div class="group relative px-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                <path stroke="currentColor" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+            <span class="nav-tooltip">Experience</span>
+            </div>
+    
+            <div class="group relative px-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24">
+                <path stroke="currentColor" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6" stroke="currentColor"></polyline>
+                </svg>
+            </div>
+            <span class="nav-tooltip">Contact</span>
+            </div>
+        </div>
+        </div>
+    </nav>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Tanish Poddar<br>
+                <span class="accent-text typing-container">
+                    <span class="typing-text"></span>
+                </span>
+            </h1>
+            <p>A versatile software developer skilled in Full-Stack Web-Dev, Android App-Dev with Kotlin, and Graphic Design. Combines creative design thinking with strong development capabilities. Proficient in responsive web apps, native Android solutions, and impactful visual design. Diverse skill set includes front-end tech, mobile frameworks, and design tools.</p>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+    <div class="section-content">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="card bg-[#0f1729] rounded-2xl overflow-hidden relative transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+                <div class="card-content p-4 relative z-10">
+                    <h2 class="text-lg font-bold text-white/90 truncate">
+                        ProjectName
+                    </h2>
+                    
+                    <div class="mb-4">
+                        <p class="text-sm text-white/70 mb-4">Project Description</p>
+                        <div class="flex flex-wrap -mx-1">
+                            <div class="px-2 py-1 m-0.5 bg-white/10 rounded-full text-xs font-medium text-white/70 shadow-sm border border-white/20 transition-all duration-300 hover:bg-white/20">
+                                Tag1
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-github w-full">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.99992 1.33331C7.12444 1.33331 6.25753 1.50575 5.4487 1.84078C4.63986 2.17581 3.90493 2.66688 3.28587 3.28593C2.03563 4.53618 1.33325 6.23187 1.33325 7.99998C1.33325 10.9466 3.24659 13.4466 5.89325 14.3333C6.22659 14.3866 6.33325 14.18 6.33325 14C6.33325 13.8466 6.33325 13.4266 6.33325 12.8733C4.48659 13.2733 4.09325 11.98 4.09325 11.98C3.78659 11.2066 3.35325 11 3.35325 11C2.74659 10.5866 3.39992 10.6 3.39992 10.6C4.06659 10.6466 4.41992 11.2866 4.41992 11.2866C4.99992 12.3 5.97992 12 6.35992 11.84C6.41992 11.4066 6.59325 11.1133 6.77992 10.9466C5.29992 10.78 3.74659 10.2066 3.74659 7.66665C3.74659 6.92665 3.99992 6.33331 4.43325 5.85998C4.36659 5.69331 4.13325 4.99998 4.49992 4.09998C4.49992 4.09998 5.05992 3.91998 6.33325 4.77998C6.85992 4.63331 7.43325 4.55998 7.99992 4.55998C8.56659 4.55998 9.13992 4.63331 9.66659 4.77998C10.9399 3.91998 11.4999 4.09998 11.4999 4.09998C11.8666 4.99998 11.6333 5.69331 11.5666 5.85998C11.9999 6.33331 12.2533 6.92665 12.2533 7.66665C12.2533 10.2133 10.6933 10.7733 9.20659 10.94C9.44659 11.1466 9.66659 11.5533 9.66659 12.1733C9.66659 13.0666 9.66659 13.7866 9.66659 14C9.66659 14.18 9.77325 14.3933 10.1133 14.3333C12.7599 13.44 14.6666 10.9466 14.6666 7.99998C14.6666 7.1245 14.4941 6.25759 14.1591 5.44876C13.8241 4.63992 13.333 3.90499 12.714 3.28593C12.0949 2.66688 11.36 2.17581 10.5511 1.84078C9.7423 1.50575 8.8754 1.33331 7.99992 1.33331V1.33331Z" fill="currentcolor"></path>
+                        </svg>
+                        <span>View on Github</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="skills" class="section">
+        <div class="section-content">
+            <h2>Skills & Technologies</h2>
+            <div class="skills-grid">
+                <!-- Skills will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <div class="section-content">
+            <h2>Education</h2>
+            <div class="education-grid">
+                <!-- Education will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="section-content">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <!-- Experience will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="section">
+        <div class="section-content">
+            <h2>Certifications</h2>
+            <div class="certificate-grid">
+                <!-- Certificates will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Update your contact section HTML -->
+    <section id="contact" class="section">
+        <div class="section-content">
+            <h2 class="contact-title">Get In Touch</h2>
+            <div class="contact-links">
+                <a href="mailto:tanishpoddar.18@gmail.com" class="contact-link">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    E-Mail
+                </a>
+                <span class="contact-separator">|</span>
+                <a href="https://github.com/tanishpoddar" class="contact-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub
+                </a>
+                <span class="contact-separator">|</span>
+                <a href="https://linkedin.com/in/tanish-poddar" class="contact-link" target="_blank" rel="noopener noreferrer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© <span id="year"></span> | Made with <span class="heart">♥</span> by Tanish Poddar</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/background.js"></script>
+    <!-- Add this before closing body tag -->
+    <button class="Btn" id="backToTop">
+        <svg height="1.2em" class="arrow" viewBox="0 0 512 512">
+          <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
+        </svg>
+    </button>
+</body>
+</html>
