@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import nodemailer from "nodemailer";
 import { insertMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
@@ -37,36 +37,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Send email
       try {
+        if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+          throw new Error("SMTP configuration is incomplete");
+        }
+
         // Create reusable transporter
-        let transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST || "smtp.gmail.com",
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
           port: parseInt(process.env.SMTP_PORT || "587"),
           secure: process.env.SMTP_SECURE === "true",
           auth: {
-            user: process.env.SMTP_USER || "",
-            pass: process.env.SMTP_PASS || "",
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
           },
-          debug: true, // Enable debug logging
-          logger: true // Enable logger
+          debug: true,
+          logger: true
         });
 
         // Verify SMTP connection configuration
-        console.log("SMTP Configuration:", {
-          host: process.env.SMTP_HOST,
-          port: process.env.SMTP_PORT,
-          secure: process.env.SMTP_SECURE,
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS ? "***" : "not set"
-        });
-
-        // Verify connection
-        try {
-          await transporter.verify();
-          console.log("SMTP connection verified successfully");
-        } catch (verifyError) {
-          console.error("SMTP verification failed:", verifyError);
-          throw verifyError;
-        }
+        console.log("Attempting SMTP connection...");
+        await transporter.verify();
+        console.log("SMTP connection verified successfully");
 
         // Send mail
         const info = await transporter.sendMail({
@@ -94,6 +85,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: error instanceof Error ? error.message : String(error),
           stack: error instanceof Error ? error.stack : undefined
         });
+        
+        // Still return 200 since the message was saved
         return res.status(200).json({ 
           message: "Your message was saved but could not be emailed. I'll still receive it!"
         });

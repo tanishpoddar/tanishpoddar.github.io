@@ -1,7 +1,23 @@
 import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { registerRoutes } from "./routes.js";
+import { setupVite, serveStatic, log } from "./vite.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Log environment variables (excluding sensitive ones)
+console.log('Environment:', {
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT,
+  SMTP_HOST: process.env.SMTP_HOST ? 'set' : 'not set',
+  SMTP_PORT: process.env.SMTP_PORT ? 'set' : 'not set',
+  SMTP_USER: process.env.SMTP_USER ? 'set' : 'not set',
+  SMTP_PASS: process.env.SMTP_PASS ? 'set' : 'not set',
+  SMTP_FROM: process.env.SMTP_FROM ? 'set' : 'not set',
+});
 
 const app = express();
 app.use(express.json());
@@ -38,30 +54,65 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  const server = await registerRoutes(app);
+  try {
+    console.log('Starting server initialization...');
+    const server = await registerRoutes(app);
+    console.log('Routes registered successfully');
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    // Error handling middleware
+    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+      console.error('Error details:', {
+        message: err.message,
+        stack: err.stack,
+        status: err.status || err.statusCode || 500
+      });
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+      res.status(status).json({ message });
+    });
 
-    res.status(status).json({ message });
-    throw err;
-  });
+    if (process.env.NODE_ENV === "development") {
+      console.log('Setting up Vite for development...');
+      await setupVite(app, server);
+    } else {
+      console.log('Setting up static file serving for production...');
+      const distPath = path.join(__dirname, '../dist/public');
+      console.log('Static files path:', distPath);
+      
+      if (!require('fs').existsSync(distPath)) {
+        throw new Error(`Static files directory not found: ${distPath}`);
+      }
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
+      // Serve static files
+      app.use(express.static(distPath));
+      
+      // Serve favicon
+      app.get('/favicon.ico', (req, res) => {
+        res.sendFile(path.join(distPath, 'images/favicon.png'));
+      });
+      
+      // Handle SPA routing
+      app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api')) {
+          next();
+          return;
+        }
+        const indexPath = path.join(distPath, 'index.html');
+        console.log('Serving index.html from:', indexPath);
+        res.sendFile(indexPath);
+      });
+    }
+
+    const port = parseInt(process.env.PORT || '5000', 10);
+    server.listen(port, "0.0.0.0", () => {
+      console.log(`Server running on port ${port}`);
+      log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Server initialization failed:', error);
+    if (error instanceof Error) {
+      console.error('Error stack:', error.stack);
+    }
+    process.exit(1);
   }
-
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen(port, "0.0.0.0", () => {
-    log(`serving on port ${port}`);
-  });
 })();
