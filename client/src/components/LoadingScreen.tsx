@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 
 const LoadingScreen = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [typingText, setTypingText] = useState("");
-  
+  const [displayedMessages, setDisplayedMessages] = useState<string[]>([]);
   const messages = [
     'Initializing components...',
     'Loading modules...',
@@ -15,46 +14,24 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     let progressInterval: NodeJS.Timeout;
-    let typingInterval: NodeJS.Timeout;
     let messageIndex = 0;
-    let charIndex = 0;
 
-    // Handle progress bar animation
-    progressInterval = setInterval(() => {
-      setLoadingProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 150);
-
-    // Handle typing animation
-    const typeWriter = () => {
+    const showMessage = () => {
       if (messageIndex < messages.length) {
         const currentMessage = messages[messageIndex];
-        
-        if (charIndex < currentMessage.length) {
-          setTypingText(prev => prev + currentMessage.charAt(charIndex));
-          charIndex++;
-        } else {
-          setTypingText("");
-          messageIndex++;
-          charIndex = 0;
-          setTimeout(() => typeWriter(), 500);
-          return;
-        }
+        setDisplayedMessages(prev => [...prev, currentMessage]);
+        messageIndex++;
+        setTimeout(showMessage, 500); // Delay before showing the next message
       }
-      
-      typingInterval = setTimeout(typeWriter, 50);
     };
-    
-    typeWriter();
+
+    // Start showing messages after a delay
+    const initialMessageDelay = setTimeout(() => showMessage(), 1000); // Initial delay before the first message
+
+    // Progress bar will be handled by CSS transition based on loadingProgress state updates later
 
     return () => {
-      clearInterval(progressInterval);
-      clearTimeout(typingInterval);
+      clearTimeout(initialMessageDelay);
     };
   }, []);
 
@@ -77,11 +54,13 @@ const LoadingScreen = () => {
             <div className="mb-2">
               <span className="text-terminal-green">$</span>{" "}
               <span className="text-terminal-command">initializing</span> portfolio.js
+
             </div>
-            <div id="typing-output" className="text-sm mb-2">
-              {typingText}<span className="animate-pulse">|</span>
-            </div>
-            <div className="mb-2">
+            <div id="message-output" className="text-sm mb-2">
+              {displayedMessages.map((message, index) => (
+                <div key={index}>{message}</div>
+              ))}
+            </div>            <div className="mb-2">
               <span className="text-terminal-green">$</span>{" "}
               <span className="text-terminal-command">loading</span> modules...
             </div>
