@@ -52,7 +52,7 @@ const Home = () => {
               <span>Email</span>
             </a>
             <a
-              href="https://linkedin.com/in/tanishpoddar"
+              href="https://linkedin.com/in/tanish-poddar"
               target="_blank"
               rel="noreferrer"
               className="flex items-center text-terminal-accent hover:text-terminal-green transition-colors"
