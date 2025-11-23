@@ -52,12 +52,12 @@ const ResumeSection = forwardRef<HTMLElement, ResumeSectionProps>((props, ref) =
               <div className="flex items-center mb-4 md:mb-0">
                 <i className="ri-file-pdf-line text-4xl text-terminal-accent mr-3"></i>
                 <div>
-                  <h3 className="text-xl font-semibold">TanishPoddar-Resume (Tech).pdf</h3>
-                  <p className="text-sm text-gray-400">Updated: May 2024</p>
+                  <h3 className="text-xl font-semibold">TanishPoddar-Resume.pdf</h3>
+                  <p className="text-sm text-gray-400">Updated: November 2025</p>
                 </div>
               </div>
               <a 
-                href="/documents/TanishPoddar-Resume (Tech).pdf" 
+                href="/documents/TanishPoddar-Resume.pdf" 
                 download
                 className="bg-terminal-accent text-terminal-bg px-4 py-2 rounded-md flex items-center hover:bg-opacity-80 transition-colors"
                 aria-label="Download Resume"
@@ -68,7 +68,7 @@ const ResumeSection = forwardRef<HTMLElement, ResumeSectionProps>((props, ref) =
             
             <div className="aspect-[3/4] bg-gray-800 rounded-md border border-gray-700 flex items-center justify-center">
               <iframe
-                src="/documents/TanishPoddar-Resume (Tech).pdf#toolbar=0"
+                src="/documents/TanishPoddar-Resume.pdf#toolbar=0"
                 className="w-full h-full rounded-md"
                 title="Resume Preview"
               />
